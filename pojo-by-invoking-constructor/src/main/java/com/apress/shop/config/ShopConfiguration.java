@@ -10,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.Resource;
 
 /**
@@ -52,10 +53,19 @@ public class ShopConfiguration {
         return disc;
     }
 
-    @Bean Product dvdrw() {
+    @Bean
+    Product dvdrw() {
         Disc disc = new Disc("DVD-RW", 4.0, specialEndofYearDiscountField);
         disc.setCapacity(1200);
         return disc;
+    }
+
+    @Bean
+    public ReloadableResourceBundleMessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:messages");
+        messageSource.setCacheSeconds(1);
+        return messageSource;
     }
 
 }

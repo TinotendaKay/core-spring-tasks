@@ -9,6 +9,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Properties;
 
 /**
@@ -40,9 +42,24 @@ public class App {
         LOGGER.info("CD-RW", cdrw);
         LOGGER.info("DVD-RW", dvdrw)*/;
 
+        Cashier cashier = context.getBean("cashier", Cashier.class);
+        cashier.checkout(shoppingCart1);
+
+
         App app = new App();
 
-        app.useDataFromExternalResources();
+        //app.useDataFromExternalResources();
+       // app.i18nTextMessages(context);
+    }
+
+    private void i18nTextMessages(ApplicationContext context) {
+
+
+        String alert = context.getMessage("alert.checkout", null, Locale.US);
+        String alertInventory = context.getMessage("alert.inventory.checkout", new Object[]{"DVD-RW 3.0", new Date()}, Locale.US);
+
+        System.out.println("The I18N message for alert.checkout is: " + alert);
+        System.out.println("The I18N message for alert.inventory.checkout is: " +alertInventory);
     }
 
     private void useDataFromExternalResources() throws IOException {
@@ -50,6 +67,5 @@ public class App {
         Properties properties = PropertiesLoaderUtils.loadProperties(resource);
         System.out.println("And don't forget our discounts!");
         System.out.println(properties.toString());
-
     }
 }
