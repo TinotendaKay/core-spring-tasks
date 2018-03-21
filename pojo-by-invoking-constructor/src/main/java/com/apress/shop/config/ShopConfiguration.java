@@ -1,9 +1,6 @@
 package com.apress.shop.config;
 
-import com.apress.shop.BannerLoader;
-import com.apress.shop.Battery;
-import com.apress.shop.Disc;
-import com.apress.shop.Product;
+import com.apress.shop.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -68,4 +65,13 @@ public class ShopConfiguration {
         return messageSource;
     }
 
+
+    @Bean(initMethod = "openFile", destroyMethod = "closeFile")
+    public Cashier cashier() {
+        String path = System.getProperty("java.io.tmpdir") + "/cashier";
+        Cashier cashier = new Cashier();
+        cashier.setFileName("checkout");
+        cashier.setPath(path);
+        return cashier;
+    }
 }
