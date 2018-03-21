@@ -19,8 +19,21 @@ public class App {
         
         Product aaa = context.getBean("aaa", Product.class);
         Product cdrw = context.getBean("cdrw", Product.class);
-        
+        Product dvdrw = context.getBean("dvdrw", Product.class);
+
+        ShoppingCart shoppingCart1 = context.getBean("shoppingCart", ShoppingCart.class);
+        shoppingCart1.addProduct(aaa);
+        shoppingCart1.addProduct(cdrw);
+
+        LOGGER.info("Shopping Cart 1: {}", shoppingCart1.getProductList());
+
+        ShoppingCart shoppingCart2 = context.getBean("shoppingCart", ShoppingCart.class);
+
+        shoppingCart2.addProduct(dvdrw);
+        LOGGER.info("Shopping Cart 2: {}", shoppingCart2.getProductList());
+
         LOGGER.info("AAA", aaa);
         LOGGER.info("CD-RW", cdrw);
+        LOGGER.info("DVD-RW", dvdrw);
     }
 }
