@@ -7,6 +7,7 @@ package com.apress.shop;
 public abstract class Product {
     private String name;
     private double price;
+    private double discount;
 
     public Product() {
     }
@@ -14,6 +15,12 @@ public abstract class Product {
     public Product(String name, double price) {
         this.name = name;
         this.price = price;
+    }
+
+    public Product(String name, double price, double discount) {
+        this.name = name;
+        this.price = price;
+        this.discount = discount;
     }
 
     public String getName() {
@@ -32,11 +39,20 @@ public abstract class Product {
         this.price = price;
     }
 
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder("Product{");
         builder.append("name=").append(name);
         builder.append(", price=").append(price);
+        builder.append(", discount=").append(discount);
         builder.append("}");
         return  builder.toString();
     }

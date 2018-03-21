@@ -10,6 +10,10 @@ public class Disc extends Product {
     public Disc() {
     }
 
+    public Disc(String name, double price, double discount) {
+        super(name, price, discount);
+    }
+
     public Disc(String name, double price) {
         super(name, price);
     }
